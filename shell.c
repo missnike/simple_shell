@@ -1,16 +1,14 @@
 #include "main.h"
 
 /**
-  * main - program that thats in args and  execute command
-  * 
-  *
-  * Return: 0 on success
-  */
+* main - program that thats in args and  execute command
+* Return: 0 on success
+*/
 
 int main(void)
 {
 	ssize_t len;
-    char *line;
+	char *line;
 	size_t len1 = 0;
 
 	while (1)
@@ -32,7 +30,6 @@ int main(void)
 	}
 
 	free(line);
-	
 	return (0);
 }
 
@@ -53,11 +50,11 @@ void free_(char **argstr)
 	}
 	free(argstr);
 }
- 
+
 /**
-  * commandfork - program that duplicate process
-  * @argstr: take in argument
-  */
+* commandfork - program that duplicate process
+* @argstr: take in argument
+*/
 
 
 void commandfork(char **argstr)

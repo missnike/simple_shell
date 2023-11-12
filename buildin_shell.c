@@ -23,12 +23,14 @@ void command(char *strline)
 		if (cmpstr(strline, "exit") == 0)
 		{
 		if (argsline[1])
-		{	status = atoi(argsline[1]);
+		{
+			status = atoi(argsline[1]);
 			free_(argsline);
 			exit(status);
 		}
 		else
-		{	free_(argsline);
+		{
+			free_(argsline);
 			exit(0);
 		}
 		}
@@ -47,11 +49,8 @@ void command(char *strline)
 		{	commandfork(argsline);
 			free_(argsline);
 		}
-
-		}
-		
+	}
 }
-
 
 /**
  * execute_env - program that execute the ennv variable
@@ -71,18 +70,14 @@ void execute_env(void)
 	}
 }
 
-
-
 /**
- * evn_location - a program the describe to the path 
- * @args_command: agument 
- *
+ * _location - a program the describe to the path
+ * @args_command: agument
  * Return: returns the path location
  */
 
 char *_location(char *args_command)
 {
-	 
 	int num1, num2;
 	char *pathenv, *pathcopy = NULL, *store, *pathfiles = NULL;
 	struct stat str;

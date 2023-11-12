@@ -1,12 +1,12 @@
 #include "main.h"
-/*
-*_envpath - A program that get envnv variable
+/**
+*_envpath - a program that get envnv variable
 * @line: an argument
 * Return: the path
- */
+*/
 
 char *_envpath(const char *line)
-{	
+{
 	int lenght = lenstr(line);
 	char **envn = NULL;
 
