@@ -1,79 +1,92 @@
-#include "main.h"
+nclude "shell.h"
+
+
+
 
 /**
-* main - program that thats in args and  execute command
-* Return: 0 on success
-*/
+ * _prompt -function that Display the shell prompt.
+ */
+void _prompt(void)
+{
+	if (isatty(STDIN_FILENO) == 1)
+	{
+		write(STDOUT_FILENO, "CISFUN$ ", 8);
+		fflush(stdout);
+	}
+}
 
+
+
+/**
+ * main - Entry point of the shell.
+ *
+ * Return: Always returns 0.
+ */
 int main(void)
 {
-	ssize_t len;
-	char *line;
-	size_t len1 = 0;
+	int store;
+	char *user_path, *_input = NULL;
+	size_t _size = 0;
+	ssize_t read_;
 
 	while (1)
 	{
+		_prompt();
+		read_ = my_getline(&_input, &_size, stdin);
+		if (read_ == -1)
+		{
+			free(_input);
+			return 0;
+		}
+		if (_input[read_ - 1] == '\n')
+			_input[read_ - 1] = '\0';
 
-	write(STDIN_FILENO, "Cisfun$ ", 8);
-
-	len = getline(&line, &len1, stdin);
-
-	if (len == -1)
-	{
-		break;
+		if (_strncmp(_input, "exit", 4) == 0)
+		{
+			free(_input);
+			_input = NULL;
+			_size = 0;
+			exit(EXIT_SUCCESS);
+		}
+		if (_strcmp(_strtrim(_input), "env") == 0)
+		{
+			_environment();
+			continue;
+		}
+		if (_strncmp(_input, "cd", 2) == 0)
+		{
+			user_path = _strtrim(_input + 2);
+			_directory(user_path);
+			free(_input);
+			_input = NULL;
+			_size = 0;
+			continue;
+		}
+		if (read_ > 1)
+		{
+			store = execute_(_input);
+			if (store == -1)
+				break;
+		}
 	}
-
-	if (line[len - 1] == '\n')
-		line[len - 1] = '\0';
-
-	command(line);
-	}
-
-	free(line);
+	free(_input);
 	return (0);
 }
 
 
 
 /**
-  * free_ - program that free allocated space
-  * @argstr: argument
-  */
-
-void free_(char **argstr)
+ * _environment - Print the environment variables.
+ * Return:void
+ */
+void _environment(void)
 {
-	int j;
+	int i;
+	char **env = environ;
 
-	for (j = 0; argstr[j] != NULL; j++)
+	for (i = 0; env[i]; i++)
 	{
-		free(argstr[j]);
+		write(STDOUT_FILENO, env[i], _strlen(env[i]));
+		write(STDOUT_FILENO, "\n", 1);
 	}
-	free(argstr);
-}
-
-/**
-* commandfork - program that duplicate process
-* @argstr: take in argument
-*/
-
-
-void commandfork(char **argstr)
-{
-	pid_t first = fork();
-
-	if (first == -1)
-	{
-		perror("error the process fail");
-		exit(1);
-	}
-	if (first == 0)
-	{
-		_exec(argstr);
-		exit(0);
-	}
-	else
-	{
-		wait(NULL);
-	}
-
 }
