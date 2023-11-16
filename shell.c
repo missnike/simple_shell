@@ -32,37 +32,30 @@ int main(void)
 		_prompt();
 		read_ = my_getline(&_input, &_size, stdin);
 		if (read_ == -1)
-		{
-			free(_input);
+		{free(_input);
 			return (0);
 		}
 		if (_input[read_ - 1] == '\n')
 			_input[read_ - 1] = '\0';
 
 		if (_strncmp(_input, "exit", 4) == 0)
-		{
-			free(_input);
-			_input = NULL;
-			_size = 0;
+		{free(_input);
+			_input = NULL, _size = 0;
 			exit(EXIT_SUCCESS);
 		}
 		if (_strcmp(_strtrim(_input), "env") == 0)
-		{
-			_environment();
+		{_environment();
 			continue;
 		}
 		if (_strncmp(_input, "cd", 2) == 0)
-		{
-			user_path = _strtrim(_input + 2);
+		{user_path = _strtrim(_input + 2);
 			_directory(user_path);
 			free(_input);
-			_input = NULL;
-			_size = 0;
+			_input = NULL, _size = 0;
 			continue;
 		}
 		if (read_ > 1)
-		{
-			store = execute_(_input);
+		{store = execute_(_input);
 			if (store == -1)
 				break;
 		}

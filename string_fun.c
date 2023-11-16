@@ -25,7 +25,7 @@ char *_strcpy(char *str, const char *src)
 }
 
 /**
- * strncmp - A function that takes three argument and compare
+ * _strncmp - A function that takes three argument and compare
  * @st1: first args
  * @st2: second args
  * @i: third arg an int
