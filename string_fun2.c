@@ -61,7 +61,7 @@ char *_strdup(const char *str)
 
 
 /**
- * catstr - A  function that  concatenates two strings
+ * _strcat - A  function that  concatenates two strings
  * @str: the string destination
  * @src: the source
  *

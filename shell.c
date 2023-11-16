@@ -34,7 +34,7 @@ int main(void)
 		if (read_ == -1)
 		{
 			free(_input);
-			return 0;
+			return (0);
 		}
 		if (_input[read_ - 1] == '\n')
 			_input[read_ - 1] = '\0';

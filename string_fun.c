@@ -25,7 +25,7 @@ char *_strcpy(char *str, const char *src)
 }
 
 /**
- * strncmp_made - A function that takes three argument and compare
+ * strncmp - A function that takes three argument and compare
  * @st1: first args
  * @st2: second args
  * @i: third arg an int
@@ -59,7 +59,6 @@ char *_strtrim(char *str)
 {
 	char *end;
 
-	
 	while (*str && (*str == ' ' || *str == '\t' || *str == '\n'))
 	{
 		str++;
